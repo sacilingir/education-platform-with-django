@@ -27,10 +27,10 @@
                                 </div>
                                 <div class="course-br">
                                     <div class="course-title">
-                                        <h2><a href="{% url 'course_detail' course.category.slug course.id %}" title="">{{course.name}}</h2>
+                                        <h2><a href="{% url 'course_detail' course.category.slug course.id%}" title="">{{course.name}}</h2>
                                     </div>
                                     <div class="course-desc">
-										<p>{{course.description | truncatechars:50}}</p>
+										<p>{{course.description | truncatechars:30}}</p>
                                     </div>
                                    
                                 </div>
@@ -49,13 +49,13 @@
 					<div class="blog-author">
 						<div class="author-bio">
 							<h3 class="author_name"><a href="#">Tom Jobs</a></h3>
-							<h5>CEO at <a href="#">SmartEDU</a></h5>
+							<h5>CEO at <a href="url ''">SmartEDU</a></h5>
 							<p class="author_det">
 								Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis saperet docendi nec, eos ea alii molestiae aliquand.
 							</p>
 						</div>
 						<div class="author-desc">
-							<img src="images/author.jpg" alt="about author">
+							<img src="{% static 'images/author.jpg' %}" alt="about author">
 							<ul class="author-social">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -82,30 +82,17 @@
 					<div class="widget-categories">
 						<h3 class="widget-title">Categories</h3>
 						<ul>
-							<li><a href="#">Political Science</a></li>
-							<li><a href="#">Business Leaders Guide</a></li>
-							<li><a href="#">Become a Product Manage</a></li>
-							<li><a href="#">Language Education</a></li>
-							<li><a href="#">Micro Biology</a></li>
-							<li><a href="#">Social Media Management</a></li>
+							{% for category in categories %}
+							<li><a href="{% url 'courses_by_category' category.slug %}">{{category.name}}</a></li>
+							{% endfor %}
 						</ul>
 					</div>
 					<div class="widget-tags">
 						<h3 class="widget-title">Search Tags</h3>
 						<ul class="tags">
-							<li><a href="#"><b>business</b></a></li>
-							<li><a href="#"><b>jquery</b></a></li>
-							<li><a href="#">corporate</a></li>
-							<li><a href="#">portfolio</a></li>
-							<li><a href="#">css3</a></li>
-							<li><a href="#"><b>theme</b></a></li>
-							<li><a href="#"><b>html5</b></a></li>
-							<li><a href="#"><b>mysql</b></a></li>
-							<li><a href="#">multipurpose</a></li>
-							<li><a href="#">responsive</a></li>
-							<li><a href="#">premium</a></li>
-							<li><a href="#">javascript</a></li>
-							<li><a href="#"><b>Best jQuery</b></a></li>
+							{% for tag in tags %}
+								<li><a href="{% url 'courses_by_tag' tag.slug %}">{% if tag.slug in request.path %} <b>{{tag.name}}</b>{% else %}{{tag.name}}{% endif %}</a></li>
+							{% endfor %}
 						</ul>
 					</div>
 				</div>

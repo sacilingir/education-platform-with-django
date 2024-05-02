@@ -8,5 +8,4 @@ urlpatterns = [
     path('tags/<slug:tag_slug>', views.tag_list, name="courses_by_tag"),
     
     
-    
 ]

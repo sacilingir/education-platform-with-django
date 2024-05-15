@@ -7,6 +7,7 @@ from courses.models import Course
 from django.contrib.auth.models import User
 
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -16,8 +17,9 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            
             user = authenticate(request, username=username,
-                                        password=password)
+                                        password=password,)
 
             if user is not None:
                 if user.is_active:
@@ -43,7 +45,7 @@ def user_register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Account has been created, You can LOGIN')
-            return redirect('index')
+            return redirect('login')
     
     else:
         form = RegisterForm()
@@ -60,5 +62,26 @@ def user_index(request):
 
 
 
+@login_required(login_url = 'login') #giriş yapılmadıysa logine yönlendirir
 def user_dashboard(request):
-   pass
+    if request.user.is_authenticated:
+        current_user = request.user
+
+        courses=current_user.courses_joined.all()
+
+        context = {
+            'current_user': current_user,
+            'courses':courses
+        }
+        return render(request, 'dashboard.html', context)
+    else:
+        return redirect('login')
+
+
+def enroll_the_course(request):
+    course_id = request.POST['course_id']
+    user_id = request.POST['user_id']
+    course = Course.objects.get(id = course_id)
+    user= User.objects.get(id=user_id)
+    course.students.add(user)
+    return redirect('dashboard')

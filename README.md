@@ -1,5 +1,6 @@
 
-![Uploading Animation (1).gif…]()
+![Animation](https://github.com/sacilingir/education-platform-with-django/assets/34628878/0d6649db-ab97-4fae-aa17-fb4501b8ae7b)
+
 
 
 # Hakkında

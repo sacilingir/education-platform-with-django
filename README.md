@@ -1,4 +1,7 @@
 
+![Uploading Animation (1).gif…]()
+
+
 # Hakkında
 
 Proje; django ile yapılmıştır.Anasayfa,hakkımızda,kurslar,eğitmenler,iletişim,kayıt ve giriş sayfalarından oluşur. 
